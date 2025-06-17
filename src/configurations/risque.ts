@@ -104,7 +104,7 @@ const questions: Question[] = [
     },
 ];
 
-// J'ai créé 3 profils de risque basés sur le scoring
+// Les profils de risque que nous avons définis, basés sur le score
 const results = [
     {
         min: 0,
@@ -122,7 +122,7 @@ const results = [
     },
     {
         min: 17,
-        max: 22, // Score maximum possible avec ces questions
+        max: 22, // Le score maximum possible avec les questions sélectionnées
         label: "Profil Dynamique",
         imageSrc: "/dynamique.jpg", // Nom d'image suggéré
         description: "Vous êtes prêt à accepter une part de risque plus importante pour viser un rendement potentiellement plus élevé. Votre horizon de temps et votre connaissance des marchés vous permettent d'envisager des placements plus offensifs."
