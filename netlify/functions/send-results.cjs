@@ -1,5 +1,5 @@
-// Fichier : netlify/functions/send-results.cjs (Version FINALE)
-// Ce code envoie réellement l'email en utilisant Resend, sans dépendances externes compliquées.
+// Fichier : netlify/functions/send-results.cjs
+// Ce code envoie l'email en utilisant Resend, sans dépendances externes compliquées.
 
 // On utilise la syntaxe require, plus robuste pour les fonctions Netlify.
 const { Resend } = require('resend');
