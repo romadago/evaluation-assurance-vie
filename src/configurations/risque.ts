@@ -3,7 +3,7 @@
 import { QuestionnaireConfig, Question } from './types.js';
 
 const questions: Question[] = [
-    // --- Situation Patrimoniale ---
+    // --- Situation ---
     {
         id: 'q4_retraite',
         question: "Quand prévoyez-vous de partir à la retraite ?",
@@ -21,9 +21,8 @@ const questions: Question[] = [
         options: [
             { label: "Inférieur à 25 000 €", value: "a", points: 0 },
             { label: "Entre 25 000 et 50 000 €", value: "b", points: 1 },
-            { label: "Entre 50 000 et 75 000 €", value: "c", points: 2 },
-            { label: "Entre 75 000 et 100 000 €", value: "d", points: 3 },
-            { label: "Au-delà de 100 000 €", value: "e", points: 4 },
+            { label: "Entre 50 000 et 100 000 €", value: "c", points: 2 },
+            { label: "Au-delà de 100 000 €", value: "d", points: 3 },
         ],
     },
     {
@@ -37,31 +36,20 @@ const questions: Question[] = [
             { label: "Plus de 1 000 €", value: "d", points: 3 },
         ],
     },
-    {
-        id: 'q11_habitation',
-        question: "Concernant votre habitation principale, quelle est aujourd'hui votre situation ?",
-        type: 'choix_unique',
-        options: [
-            { label: "Locataire", value: "a", points: 0 },
-            { label: "Propriétaire avec un emprunt de plus de 5 ans", value: "b", points: 1 },
-            { label: "Propriétaire avec un emprunt de moins de 5 ans", value: "c", points: 2 },
-            { label: "Propriétaire sans remboursement", value: "d", points: 3 },
-        ],
-    },
-    
-    // --- Connaissance & Expérience ---
+     // --- Connaissance & Expérience ---
     {
         id: 'q17_experience_actions',
         question: "Avez-vous déjà investi dans des actions (détenues en direct) ?",
         type: 'choix_unique',
         options: [
             { label: "Non", value: "non", points: 0 },
-            { label: "Oui", value: "oui", points: 2 },
+            { label: "Oui, une fois", value: "oui_1", points: 1 },
+            { label: "Oui, plusieurs fois", value: "oui_plusieurs", points: 2 },
         ],
     },
     {
         id: 'q25_connaissance_rendement',
-        question: "Pour espérer avoir un rendement élevé, il faut être disposé à prendre des risques et, au final, accepter de perdre de l'argent.",
+        question: "Pour espérer avoir un rendement élevé, il faut accepter de pouvoir perdre de l'argent.",
         type: 'choix_unique',
         options: [
             { label: "Vrai", value: "vrai", points: 2 },
@@ -71,10 +59,30 @@ const questions: Question[] = [
     },
     {
         id: 'q27_connaissance_diversification',
-        question: "Sur un même marché, un portefeuille qui contient un nombre élevé de produits est généralement moins risqué qu'un portefeuille concentré sur un seul produit.",
+        question: "Un portefeuille diversifié est généralement moins risqué qu'un portefeuille concentré sur un seul produit.",
         type: 'choix_unique',
         options: [
             { label: "Vrai", value: "vrai", points: 2 },
+            { label: "Faux", value: "faux", points: 0 },
+            { label: "Je ne sais pas", value: "nsp", points: 0 },
+        ],
+    },
+    {
+        id: 'q28_connaissance_action_pret',
+        question: "Quand je détiens une action d'une société, je lui prête de l'argent.",
+        type: 'choix_unique',
+        options: [
+            { label: "Vrai", value: "vrai", points: 0 },
+            { label: "Faux", value: "faux", points: 1 },
+            { label: "Je ne sais pas", value: "nsp", points: 0 },
+        ],
+    },
+     {
+        id: 'q32_connaissance_opcvm',
+        question: "Les OPCVM investis en actions sont généralement plus risqués que les OPCVM investis en obligations.",
+        type: 'choix_unique',
+        options: [
+            { label: "Vrai", value: "vrai", points: 1 },
             { label: "Faux", value: "faux", points: 0 },
             { label: "Je ne sais pas", value: "nsp", points: 0 },
         ],
@@ -89,8 +97,7 @@ const questions: Question[] = [
             { label: "Je ne sais pas", value: "nsp", points: 0 },
         ],
     },
-
-    // --- Tolérance au risque ---
+     // --- Tolérance au risque ---
     {
         id: 'q42_reaction_perte',
         question: "Vous avez investi dans un produit qui vient de perdre 20% en trois mois. Quelle est votre réaction ?",
@@ -127,27 +134,26 @@ const questions: Question[] = [
     },
 ];
 
-// Les profils de risque que nous avons définis, basés sur le scoring
 const results = [
     {
         min: 0,
-        max: 8,
+        max: 10,
         label: "Profil Prudent",
-        imageSrc: "/prudent.jpg", // Nom d'image suggéré
+        imageSrc: "/prudent.jpg",
         description: "Votre profil privilégie la sécurité et la préservation du capital. Les solutions à faible risque, même avec un rendement modéré, sont les plus adaptées à vos objectifs."
     },
     {
-        min: 9,
-        max: 18,
+        min: 11,
+        max: 20,
         label: "Profil Équilibré",
-        imageSrc: "/equilibre.jpg", // Nom d'image suggéré
+        imageSrc: "/equilibre.jpg",
         description: "Vous recherchez un bon compromis entre la sécurité et la performance. Un portefeuille diversifié, alliant des actifs garantis et une part d'actifs plus dynamiques, correspond à votre approche."
     },
     {
-        min: 19,
-        max: 27, // Score maximum possible avec cette sélection de questions
+        min: 21,
+        max: 28, // Score maximum possible avec cette sélection de questions
         label: "Profil Dynamique",
-        imageSrc: "/dynamique.jpg", // Nom d'image suggéré
+        imageSrc: "/dynamique.jpg",
         description: "Vous êtes prêt à accepter une part de risque plus importante pour viser un rendement potentiellement plus élevé. Votre horizon de temps et votre connaissance des marchés vous permettent d'envisager des placements plus offensifs."
     }
 ];
