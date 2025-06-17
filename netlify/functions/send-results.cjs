@@ -25,7 +25,7 @@ exports.handler = async function(event) {
 
     // --- Envoi de l'email via Resend ---
     await resend.emails.send({
-      from: 'Aeternia Patrimoine <noreply@aeterniapatrimoine.fr>',
+      from: 'Aeternia Patrimoine <noreply@aeterniapatrimoine.fr>', // Virgule ajoutée ici
       to: [email],
       subject: `Vos résultats au questionnaire : ${quizTitle}`,
       html: `
@@ -59,3 +59,4 @@ exports.handler = async function(event) {
     };
   }
 };
+
