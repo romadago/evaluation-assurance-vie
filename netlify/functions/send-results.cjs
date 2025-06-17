@@ -1,10 +1,6 @@
 // Fichier : netlify/functions/send-results.cjs
-// Ce code envoie l'email en utilisant Resend, sans dépendances externes compliquées.
+// VERSION FINALE : utilise l'API de Resend directement, sans dépendances externes.
 
-// On utilise la syntaxe require, plus robuste pour les fonctions Netlify.
-const { Resend } = require('resend');
-
-// On exporte la fonction avec la syntaxe CommonJS
 exports.handler = async function(event) {
   // On vérifie que la méthode est bien POST
   if (event.httpMethod !== 'POST') {
@@ -12,9 +8,6 @@ exports.handler = async function(event) {
   }
 
   try {
-    // On initialise Resend avec la clé API stockée sur Netlify
-    const resend = new Resend(process.env.RESEND_API_KEY);
-
     // On récupère les données envoyées par le front-end
     const data = JSON.parse(event.body);
     const { email, quizTitle, score, maxScore, resultLabel, resultDescription } = data;
@@ -23,9 +16,9 @@ exports.handler = async function(event) {
     if (!email || !quizTitle || !resultLabel || !resultDescription) {
       return { statusCode: 400, body: 'Données manquantes pour l\'envoi de l\'email.' };
     }
-
-    // --- Envoi de l'email via Resend ---
-    await resend.emails.send({
+    
+    // On prépare les données pour l'API de Resend
+    const emailPayload = {
       from: 'Aeternia Patrimoine <noreply@aeterniapatrimoine.fr>',
       to: [email],
       subject: `Vos résultats au questionnaire : ${quizTitle}`,
@@ -43,7 +36,24 @@ exports.handler = async function(event) {
           <p><strong>L'équipe Aeternia Patrimoine</strong></p>
         </div>
       `,
+    };
+
+    // --- Appel direct à l'API de Resend avec fetch ---
+    const response = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.RESEND_API_KEY}` // On utilise la clé API
+      },
+      body: JSON.stringify(emailPayload)
     });
+
+    if (!response.ok) {
+      // Si Resend retourne une erreur, on la capture
+      const errorData = await response.json();
+      console.error("Erreur de l'API Resend :", errorData);
+      throw new Error("L'API Resend a retourné une erreur.");
+    }
 
     // On retourne une réponse de succès au front-end
     return {
@@ -52,11 +62,10 @@ exports.handler = async function(event) {
     };
 
   } catch (error) {
-    console.error("Erreur dans la fonction Netlify :", error);
-    // En cas d'erreur, on retourne une réponse d'erreur au front-end
+    console.error("Erreur dans la fonction Netlify :", error.message);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: "Une erreur est survenue lors de l'envoi de l'email." }),
+      body: JSON.stringify({ error: "Une erreur interne est survenue lors de l'envoi de l'email." }),
     };
   }
 };
