@@ -1,11 +1,10 @@
-// Fichier : netlify/functions/send-results.js
+// Fichier : netlify/functions/send-results.cjs
+// IMPORTANT: Le nom du fichier doit maintenant se terminer par .cjs pour être traité comme un module CommonJS.
 
-// Pour utiliser la syntaxe "import", vous devez vous assurer que votre package.json contient "type": "module"
-// Sinon, utilisez const { Resend } = require('resend');
-import { Resend } from 'resend';
+const { Resend } = require('resend');
 
-// La fonction principale qui sera exécutée par Netlify
-export async function handler(event) {
+// On exporte la fonction avec la syntaxe CommonJS (exports.handler)
+exports.handler = async function(event) {
   // On s'assure que la requête vient bien du front-end via une méthode POST
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' };
@@ -13,8 +12,6 @@ export async function handler(event) {
 
   try {
     // On initialise Resend avec la clé API.
-    // C'est la manière sécurisée de gérer les clés secrètes : elles sont stockées
-    // en tant que variables d'environnement sur le site de Netlify, pas dans le code.
     const resend = new Resend(process.env.RESEND_API_KEY);
 
     // On récupère les données envoyées par le composant React
@@ -28,7 +25,6 @@ export async function handler(event) {
 
     // --- Envoi de l'email via Resend ---
     await resend.emails.send({
-      // IMPORTANT : Doit être une adresse de votre domaine vérifié sur Resend
       from: 'Aeternia Patrimoine <noreply@aeterniapatrimoine.fr>', 
       to: [email], // L'adresse email de l'utilisateur
       subject: `Vos résultats au questionnaire : ${quizTitle}`,
@@ -63,4 +59,5 @@ export async function handler(event) {
       body: JSON.stringify({ error: "Une erreur est survenue lors de l'envoi de l'email." }),
     };
   }
-}
+};
+
