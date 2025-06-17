@@ -16,6 +16,7 @@
     "prettier": "^3.5.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-promise-suspense": "^0.3.4",
     "resend": "^4.6.0"
   },
   "devDependencies": {
