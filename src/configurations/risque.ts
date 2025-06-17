@@ -3,7 +3,7 @@
 import { QuestionnaireConfig, Question } from './types.js';
 
 const questions: Question[] = [
-    // --- Situation ---
+    // --- SITUATION PERSONNELLE & PATRIMONIALE ---
     {
         id: 'q4_retraite',
         question: "Quand prévoyez-vous de partir à la retraite ?",
@@ -21,8 +21,9 @@ const questions: Question[] = [
         options: [
             { label: "Inférieur à 25 000 €", value: "a", points: 0 },
             { label: "Entre 25 000 et 50 000 €", value: "b", points: 1 },
-            { label: "Entre 50 000 et 100 000 €", value: "c", points: 2 },
-            { label: "Au-delà de 100 000 €", value: "d", points: 3 },
+            { label: "Entre 50 000 et 75 000 €", value: "c", points: 2 },
+            { label: "Entre 75 000 et 100 000 €", value: "d", points: 3 },
+            { label: "Au-delà de 100 000 €", value: "e", points: 4 },
         ],
     },
     {
@@ -36,20 +37,82 @@ const questions: Question[] = [
             { label: "Plus de 1 000 €", value: "d", points: 3 },
         ],
     },
-     // --- Connaissance & Expérience ---
+    {
+        id: 'q7_patrimoine_immo',
+        question: "A combien estimez-vous votre patrimoine immobilier (emprunts déduits) ?",
+        type: 'choix_unique',
+        options: [
+            { label: "0", value: "a", points: 0 },
+            { label: "Inférieur à 100 000 €", value: "b", points: 1 },
+            { label: "Entre 100 000 et 300 000 €", value: "c", points: 2 },
+            { label: "Au-delà de 300 000 €", value: "d", points: 3 },
+        ],
+    },
+    {
+        id: 'q8_patrimoine_financier',
+        question: "À combien estimez-vous votre patrimoine financier (hors immobilier) ?",
+        type: 'choix_unique',
+        options: [
+            { label: "Inférieur à 20 000 €", value: "a", points: 0 },
+            { label: "Entre 20 000 et 50 000 €", value: "b", points: 1 },
+            { label: "Entre 50 000 et 200 000 €", value: "c", points: 2 },
+            { label: "Au-delà de 200 000 €", value: "d", points: 3 },
+        ],
+    },
+    {
+        id: 'q11_habitation',
+        question: "Concernant votre habitation principale, quelle est aujourd'hui votre situation ?",
+        type: 'choix_unique',
+        options: [
+            { label: "Locataire", value: "a", points: 0 },
+            { label: "Propriétaire avec un emprunt de plus de 5 ans", value: "b", points: 1 },
+            { label: "Propriétaire avec un emprunt de moins de 5 ans", value: "c", points: 2 },
+            { label: "Propriétaire sans remboursement", value: "d", points: 3 },
+        ],
+    },
+    {
+        id: 'q13_evolution_revenus',
+        question: "Estimez-vous que vos revenus vont :",
+        type: 'choix_unique',
+        options: [
+            { label: "Augmenter régulièrement dans le temps", value: "a", points: 2 },
+            { label: "Rester à peu près stables", value: "b", points: 1 },
+            { label: "Baisser ou être instables", value: "c", points: 0 },
+            { label: "Je ne sais pas", value: "d", points: 0 },
+        ],
+    },
+    
+    // --- CONNAISSANCE & EXPÉRIENCE FINANCIÈRE ---
     {
         id: 'q17_experience_actions',
         question: "Avez-vous déjà investi dans des actions (détenues en direct) ?",
         type: 'choix_unique',
         options: [
             { label: "Non", value: "non", points: 0 },
-            { label: "Oui, une fois", value: "oui_1", points: 1 },
-            { label: "Oui, plusieurs fois", value: "oui_plusieurs", points: 2 },
+            { label: "Oui", value: "oui", points: 2 },
+        ],
+    },
+     {
+        id: 'q19_experience_opcvm',
+        question: "Avez-vous déjà investi dans des OPCVM (FCP, SICAV) ?",
+        type: 'choix_unique',
+        options: [
+            { label: "Non", value: "non", points: 0 },
+            { label: "Oui", value: "oui", points: 1 },
+        ],
+    },
+    {
+        id: 'q20_experience_scpi',
+        question: "Avez-vous déjà investi dans de l'immobilier financier (SCPI, OPCI) ?",
+        type: 'choix_unique',
+        options: [
+            { label: "Non", value: "non", points: 0 },
+            { label: "Oui", value: "oui", points: 1 },
         ],
     },
     {
         id: 'q25_connaissance_rendement',
-        question: "Pour espérer avoir un rendement élevé, il faut accepter de pouvoir perdre de l'argent.",
+        question: "Pour espérer avoir un rendement élevé, il faut être disposé à prendre des risques et, au final, accepter de perdre de l'argent.",
         type: 'choix_unique',
         options: [
             { label: "Vrai", value: "vrai", points: 2 },
@@ -59,7 +122,7 @@ const questions: Question[] = [
     },
     {
         id: 'q27_connaissance_diversification',
-        question: "Un portefeuille diversifié est généralement moins risqué qu'un portefeuille concentré sur un seul produit.",
+        question: "Sur un même marché, un portefeuille qui contient un nombre élevé de produits est généralement moins risqué qu'un portefeuille concentré sur un seul produit.",
         type: 'choix_unique',
         options: [
             { label: "Vrai", value: "vrai", points: 2 },
@@ -97,7 +160,7 @@ const questions: Question[] = [
             { label: "Je ne sais pas", value: "nsp", points: 0 },
         ],
     },
-     // --- Tolérance au risque ---
+    // --- TOLÉRANCE AU RISQUE ---
     {
         id: 'q42_reaction_perte',
         question: "Vous avez investi dans un produit qui vient de perdre 20% en trois mois. Quelle est votre réaction ?",
@@ -132,26 +195,37 @@ const questions: Question[] = [
             { label: "Pire résultat : -50% / Meilleur résultat : +200%", value: "e", points: 4 },
         ],
     },
+    {
+        id: 'q47_inquietude_perte',
+        question: "À partir de quel niveau de perte êtes-vous vraiment inquiet(e) ?",
+        type: 'choix_unique',
+        options: [
+            { label: "5%", value: "a", points: 0 },
+            { label: "10%", value: "b", points: 1 },
+            { label: "20%", value: "c", points: 2 },
+            { label: "Je suis toujours confiant(e)", value: "d", points: 3 },
+        ],
+    },
 ];
 
 const results = [
     {
         min: 0,
-        max: 10,
+        max: 12,
         label: "Profil Prudent",
         imageSrc: "/prudent.jpg",
         description: "Votre profil privilégie la sécurité et la préservation du capital. Les solutions à faible risque, même avec un rendement modéré, sont les plus adaptées à vos objectifs."
     },
     {
-        min: 11,
-        max: 20,
+        min: 13,
+        max: 24,
         label: "Profil Équilibré",
         imageSrc: "/equilibre.jpg",
         description: "Vous recherchez un bon compromis entre la sécurité et la performance. Un portefeuille diversifié, alliant des actifs garantis et une part d'actifs plus dynamiques, correspond à votre approche."
     },
     {
-        min: 21,
-        max: 28, // Score maximum possible avec cette sélection de questions
+        min: 25,
+        max: 37, // Score maximum possible avec cette sélection de questions
         label: "Profil Dynamique",
         imageSrc: "/dynamique.jpg",
         description: "Vous êtes prêt à accepter une part de risque plus importante pour viser un rendement potentiellement plus élevé. Votre horizon de temps et votre connaissance des marchés vous permettent d'envisager des placements plus offensifs."
