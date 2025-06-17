@@ -36,7 +36,7 @@ const MoteurQuestionnaire: React.FC<MoteurProps> = ({ config, email }) => {
     setSendStatus('idle');
   };
 
-  // --- CALCULS DE SCORE ---
+  // --- Calculs de score ---
   const totalPoints = answers.reduce((sum, answer, idx) => {
     if (!answer) return sum;
     const question = config.questions[idx];
@@ -52,13 +52,14 @@ const MoteurQuestionnaire: React.FC<MoteurProps> = ({ config, email }) => {
   const result = config.results.find(r => totalPoints >= r.min && totalPoints <= r.max);
   const progressPercentage = ((current + 1) / config.questions.length) * 100;
   
-  // --- ENVOI D'EMAIL ---
+  // --- Envoi d'email ---
   const handleSendResults = async () => {
     setSending(true);
     setSendStatus('idle');
     if (!result) return;
 
     try {
+      // Note: Assurez-vous d'avoir une fonction Netlify nommée 'send-results'
       const response = await fetch('/.netlify/functions/send-results', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -72,17 +73,17 @@ const MoteurQuestionnaire: React.FC<MoteurProps> = ({ config, email }) => {
         }),
       });
 
-      if (!response.ok) throw new Error('Réponse serveur non OK');
+      if (!response.ok) throw new Error('La réponse du serveur n\'est pas OK');
       setSendStatus('success');
     } catch (error) {
-      console.error("Erreur d'envoi:", error);
+      console.error("Erreur lors de l'envoi de l'email:", error);
       setSendStatus('error');
     } finally {
       setSending(false);
     }
   };
 
-  // --- RENDU VISUEL ---
+  // --- Rendu Visuel ---
   if (!submitted) {
     const currentQuestion: Question = config.questions[current];
     return (

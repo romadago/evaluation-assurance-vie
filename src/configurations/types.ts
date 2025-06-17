@@ -1,21 +1,21 @@
 // Fichier : src/configurations/types.ts
 
-// Chaque option a des points
+// On réintroduit les "points" dans les options.
 export interface Option {
   label: string;
   value: string;
   points: number; 
 }
 
-// Chaque question a un ID et des options avec des points
+// La question n'a plus besoin de logique conditionnelle 'showIf'
 export interface Question {
   id: string; 
   question: string;
-  type: 'choix_unique' | 'choix_multiple';
+  type: 'choix_unique' | 'choix_multiple'; // Pour le scoring, on se concentre sur les choix
   options: Option[];
 }
 
-// Chaque résultat a une tranche de score (min/max)
+// Les résultats sont à nouveau basés sur un score min/max
 export interface Result {
     min: number;
     max: number;
