@@ -2,8 +2,7 @@
 
 import { QuestionnaireConfig, Question } from './types.js';
 
-// J'ai transcrit les premières questions de votre PDF.
-// Vous devrez continuer à ajouter les autres questions ici en suivant ce modèle.
+// Vous devrez compléter cette liste avec toutes les questions de votre PDF.
 const questions: Question[] = [
   // --- Situation personnelle ---
   {
@@ -58,14 +57,13 @@ const questions: Question[] = [
       { label: "Plus de 10 fois", value: "plus_de_10_fois" },
     ],
   },
+   // --- Ajoutez ici le reste de vos questions ---
 ];
 
-// CORRECTION ICI : Le mot "export" est crucial pour que le fichier soit un module valide.
 export const configRisque: QuestionnaireConfig = {
   id: 'questionnaire-risque',
   titre: 'Questionnaire de Risque',
   stockageId: 'reponses_risque_profil',
   questions: questions,
-  results: [], // Pour ce questionnaire, le résultat est la collecte des données
+  results: [], // Ce tableau peut rester vide pour ce type de questionnaire
 };
-

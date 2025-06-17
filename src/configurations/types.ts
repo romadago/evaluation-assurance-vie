@@ -1,14 +1,12 @@
-// Fichier : src/configurations/types.ts (Mis à jour pour le questionnaire de risque)
+// Fichier : src/configurations/types.ts (Spécifique pour le Questionnaire de Risque)
 
-// Les options n'ont plus besoin de "points" pour ce questionnaire.
-// Je rends donc la propriété "points" optionnelle en ajoutant un "?".
+// Les options n'ont plus besoin de "points".
 export interface Option {
   label: string;
   value: string;
-  points?: number; 
 }
 
-// J'ajoute l'ID unique et obligatoire à chaque question, ainsi que la logique conditionnelle.
+// Chaque question a un 'id' et peut avoir une condition d'affichage 'showIf'.
 export interface Question {
   id: string; 
   question: string;
@@ -16,18 +14,15 @@ export interface Question {
   options?: Option[];
   placeholder?: string;
   showIf?: {
-    questionId: string;
-    value: any;
+    questionId: string; // ID de la question parente à vérifier
+    value: any;         // Valeur de la réponse qui déclenche l'affichage
   };
 }
 
-// Les résultats ne sont plus basés sur un score.
-export interface Result {
-  label: string;
-  description: string;
-  imageSrc: string;
-}
+// Pour ce questionnaire, le concept de "Result" basé sur un score n'est pas utilisé.
+export interface Result {}
 
+// La configuration globale du questionnaire.
 export interface QuestionnaireConfig {
   id: string;
   titre: string;
