@@ -3,7 +3,7 @@
 import { QuestionnaireConfig, Question } from './types.js';
 
 const questions: Question[] = [
-    // --- SITUATION PERSONNELLE & PATRIMONIALE ---
+    // --- Situation Patrimoniale ---
     {
         id: 'q4_retraite',
         question: "Quand prévoyez-vous de partir à la retraite ?",
@@ -38,29 +38,18 @@ const questions: Question[] = [
         ],
     },
     {
-        id: 'q7_patrimoine_immo',
-        question: "A combien estimez-vous votre patrimoine immobilier (emprunts déduits) ?",
+        id: 'q11_habitation',
+        question: "Concernant votre habitation principale, quelle est aujourd'hui votre situation ?",
         type: 'choix_unique',
         options: [
-            { label: "0", value: "a", points: 0 },
-            { label: "Inférieur à 100 000 €", value: "b", points: 1 },
-            { label: "Entre 100 000 et 300 000 €", value: "c", points: 2 },
-            { label: "Au-delà de 300 000 €", value: "d", points: 3 },
+            { label: "Locataire", value: "a", points: 0 },
+            { label: "Propriétaire avec un emprunt de plus de 5 ans", value: "b", points: 1 },
+            { label: "Propriétaire avec un emprunt de moins de 5 ans", value: "c", points: 2 },
+            { label: "Propriétaire sans remboursement", value: "d", points: 3 },
         ],
     },
-    {
-        id: 'q8_patrimoine_financier',
-        question: "À combien estimez-vous votre patrimoine financier (hors immobilier) ?",
-        type: 'choix_unique',
-        options: [
-            { label: "Inférieur à 20 000 €", value: "a", points: 0 },
-            { label: "Entre 20 000 et 50 000 €", value: "b", points: 1 },
-            { label: "Entre 50 000 et 200 000 €", value: "c", points: 2 },
-            { label: "Au-delà de 200 000 €", value: "d", points: 3 },
-        ],
-    },
-
-    // --- EXPÉRIENCE & CONNAISSANCE FINANCIÈRE ---
+    
+    // --- Connaissance & Expérience ---
     {
         id: 'q17_experience_actions',
         question: "Avez-vous déjà investi dans des actions (détenues en direct) ?",
@@ -101,14 +90,14 @@ const questions: Question[] = [
         ],
     },
 
-    // --- TOLÉRANCE AU RISQUE ---
+    // --- Tolérance au risque ---
     {
         id: 'q42_reaction_perte',
         question: "Vous avez investi dans un produit qui vient de perdre 20% en trois mois. Quelle est votre réaction ?",
         type: 'choix_unique',
         options: [
             { label: "Je vends, j'ai déjà trop attendu.", value: "a", points: 0 },
-            { label: "J'attends un peu mais si cela ne s'améliore pas dans le mois qui vient, j'agis.", value: "b", points: 1 },
+            { label: "J'attends un peu mais si cela ne s'améliore pas, j'agis.", value: "b", points: 1 },
             { label: "Pas de problème, j'attends. Tant que je n'ai pas vendu, je n'ai pas perdu !", value: "c", points: 2 },
             { label: "J'augmente mon investissement. À ce prix là, c'est cadeau !", value: "d", points: 3 },
         ],
@@ -138,17 +127,17 @@ const questions: Question[] = [
     },
 ];
 
-// J'ai créé 3 profils de risque basés sur le scoring
+// Les profils de risque que nous avons définis, basés sur le scoring
 const results = [
     {
         min: 0,
-        max: 9,
+        max: 8,
         label: "Profil Prudent",
         imageSrc: "/prudent.jpg", // Nom d'image suggéré
         description: "Votre profil privilégie la sécurité et la préservation du capital. Les solutions à faible risque, même avec un rendement modéré, sont les plus adaptées à vos objectifs."
     },
     {
-        min: 10,
+        min: 9,
         max: 18,
         label: "Profil Équilibré",
         imageSrc: "/equilibre.jpg", // Nom d'image suggéré
@@ -156,7 +145,7 @@ const results = [
     },
     {
         min: 19,
-        max: 28, // Score maximum possible avec ces questions
+        max: 27, // Score maximum possible avec cette sélection de questions
         label: "Profil Dynamique",
         imageSrc: "/dynamique.jpg", // Nom d'image suggéré
         description: "Vous êtes prêt à accepter une part de risque plus importante pour viser un rendement potentiellement plus élevé. Votre horizon de temps et votre connaissance des marchés vous permettent d'envisager des placements plus offensifs."
