@@ -1,4 +1,4 @@
-// Fichier : src/MoteurQuestionnaire.tsx (Version avec scoring)
+// Fichier : src/MoteurQuestionnaire.tsx
 
 import React, { useState } from 'react';
 import { QuestionnaireConfig, Question } from './configurations/types.js';
@@ -51,15 +51,24 @@ const MoteurQuestionnaire: React.FC<MoteurProps> = ({ config, email }) => {
 
   const result = config.results.find(r => totalPoints >= r.min && totalPoints <= r.max);
   const progressPercentage = ((current + 1) / config.questions.length) * 100;
-  
-  // --- Envoi d'email ---
+
+  // --- NOUVELLE FONCTION D'ENVOI D'EMAIL ---
   const handleSendResults = async () => {
     setSending(true);
     setSendStatus('idle');
     if (!result) return;
 
+    // On prépare un tableau détaillé des questions et réponses
+    const fullAnswers = config.questions.map((question, index) => {
+        const answerValue = answers[index];
+        const selectedOption = question.options.find(opt => opt.value === answerValue);
+        return {
+            question: question.question,
+            answer: selectedOption ? selectedOption.label : 'Non répondu'
+        };
+    });
+
     try {
-      // Note: Assurez-vous d'avoir une fonction Netlify nommée 'send-results'
       const response = await fetch('/.netlify/functions/send-results', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -70,20 +79,21 @@ const MoteurQuestionnaire: React.FC<MoteurProps> = ({ config, email }) => {
           maxScore,
           resultLabel: result.label,
           resultDescription: result.description,
+          fullAnswers: fullAnswers, // On envoie le tableau détaillé
         }),
       });
 
       if (!response.ok) throw new Error('La réponse du serveur n\'est pas OK');
       setSendStatus('success');
     } catch (error) {
-      console.error("Erreur lors de l'envoi de l'email:", error);
+      console.error("Erreur d'envoi:", error);
       setSendStatus('error');
     } finally {
       setSending(false);
     }
   };
 
-  // --- Rendu Visuel ---
+  // ... (le reste du JSX reste identique) ...
   if (!submitted) {
     const currentQuestion: Question = config.questions[current];
     return (
@@ -144,5 +154,3 @@ const MoteurQuestionnaire: React.FC<MoteurProps> = ({ config, email }) => {
     </div>
   );
 };
-
-export default MoteurQuestionnaire;
