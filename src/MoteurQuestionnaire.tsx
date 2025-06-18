@@ -59,6 +59,16 @@ const MoteurQuestionnaire: React.FC<MoteurProps> = ({ config, email }) => {
     setSendStatus('idle');
     if (!result) return;
 
+    // On prépare un tableau détaillé des questions et réponses
+    const fullAnswers = config.questions.map((question, index) => {
+        const answerValue = answers[index];
+        const selectedOption = question.options.find(opt => opt.value === answerValue);
+        return {
+            question: question.question,
+            answer: selectedOption ? selectedOption.label : 'Non répondu'
+        };
+    });
+
     try {
       const response = await fetch('/.netlify/functions/send-results', {
         method: 'POST',
@@ -70,6 +80,7 @@ const MoteurQuestionnaire: React.FC<MoteurProps> = ({ config, email }) => {
           maxScore,
           resultLabel: result.label,
           resultDescription: result.description,
+          fullAnswers: fullAnswers, // On envoie bien la synthèse complète
         }),
       });
 

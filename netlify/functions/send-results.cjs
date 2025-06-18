@@ -38,9 +38,9 @@ exports.handler = async function(event) {
 
     // --- Envoi de l'email ---
     await resend.emails.send({
-      from: 'Aeternia Patrimoine <contact@aeterniapatrimoine.fr>', // <-- ADRESSE MISE À JOUR ICI
+      from: 'Aeternia Patrimoine <contact@aeterniapatrimoine.fr>', 
       to: [email], // Envoi au prospect
-      bcc: ['VOTRE_EMAIL_ADMIN@exemple.com'], // IMPORTANT: Mettez votre propre email ici pour recevoir une copie
+      bcc: ['contact@aeterniapatrimoine.fr'], // <-- ADRESSE MISE À JOUR ICI pour la copie admin
       subject: `Vos résultats au questionnaire : ${quizTitle}`,
       html: `
         <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
