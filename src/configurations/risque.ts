@@ -218,4 +218,5 @@ export const configRisque: QuestionnaireConfig = {
     titre: 'Définissez votre Profil d\'Investisseur',
     stockageId: 'reponses_profil_risque',
     questions: questions,
-    results: results,
+    results: results
+};
