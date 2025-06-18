@@ -3,7 +3,7 @@
 import { QuestionnaireConfig, Question } from './types.js';
 
 const questions: Question[] = [
-    // --- Situation Patrimoniale (Questions 5 à 8, 12, 13 du PDF) ---
+    // --- Situation Patrimoniale ---
     {
         id: 'q5_revenus',
         question: "Quels sont les revenus nets annuels de votre foyer ?",
@@ -46,7 +46,7 @@ const questions: Question[] = [
     },
     {
         id: 'q12_depense_imprevue',
-        question: "Si vous deviez faire face à une dépense importante et imprévue, pourriez-vous le faire grâce à vos seuls revenus ou liquidités ?",
+        question: "Si vous deviez faire face à une dépense importante et imprévue, pourriez-vous le faire avec vos seules liquidités ?",
         type: 'choix_unique',
         options: [
             { label: "Non", value: "non", points: 0 },
@@ -65,7 +65,7 @@ const questions: Question[] = [
         ],
     },
     
-    // --- Expérience et Connaissances (Questions 17 à 37 du PDF) ---
+    // --- Expérience et Connaissances ---
     {
         id: 'q17_experience_actions',
         question: "Votre expérience d'investissement en actions directes ?",
@@ -107,36 +107,46 @@ const questions: Question[] = [
     },
     {
         id: 'q25_connaissance_rendement',
-        question: "Pour espérer un rendement élevé, il faut accepter un risque de perte en capital.",
+        question: "Vrai ou Faux : Pour espérer un rendement élevé, il faut accepter un risque de perte en capital.",
         type: 'choix_unique',
-        options: [{ label: "Vrai", value: "vrai", points: 2 },{ label: "Faux", value: "faux", points: 0 },{ label: "Je ne sais pas", value: "nsp", points: 0 }],
-    },
-    {
-        id: 'q26_connaissance_temps',
-        question: "Plus j'ai du temps devant moi, plus je peux prendre des positions risquées.",
-        type: 'choix_unique',
-        options: [{ label: "Vrai", value: "vrai", points: 2 },{ label: "Faux", value: "faux", points: 0 },{ label: "Je ne sais pas", value: "nsp", points: 0 }],
+        options: [{ label: "Vrai", value: "vrai", points: 2 },{ label: "Faux", value: "faux", points: 0 }, { label: "Je ne sais pas", value: "nsp", points: 0 }],
     },
     {
         id: 'q27_connaissance_diversification',
-        question: "Un portefeuille diversifié est généralement moins risqué qu'un portefeuille concentré.",
+        question: "Vrai ou Faux : Un portefeuille diversifié est généralement moins risqué qu'un portefeuille concentré.",
         type: 'choix_unique',
-        options: [{ label: "Vrai", value: "vrai", points: 2 },{ label: "Faux", value: "faux", points: 0 },{ label: "Je ne sais pas", value: "nsp", points: 0 }],
+        options: [{ label: "Vrai", value: "vrai", points: 2 },{ label: "Faux", value: "faux", points: 0 }, { label: "Je ne sais pas", value: "nsp", points: 0 }],
     },
-     {
+    {
         id: 'q34_connaissance_volatilite',
-        question: "La volatilité d'un fonds est un bon indicateur de son niveau de risque.",
+        question: "Vrai ou Faux : La volatilité d'un fonds est un bon indicateur de son niveau de risque.",
         type: 'choix_unique',
-        options: [{ label: "Vrai", value: "vrai", points: 2 },{ label: "Faux", value: "faux", points: 0 },{ label: "Je ne sais pas", value: "nsp", points: 0 }],
+        options: [{ label: "Vrai", value: "vrai", points: 2 },{ label: "Faux", value: "faux", points: 0 }, { label: "Je ne sais pas", value: "nsp", points: 0 }],
     },
      {
         id: 'q37_connaissance_blocage_av',
-        question: "Dans un contrat d'assurance-vie, mes fonds sont bloqués pendant huit ans.",
+        question: "Vrai ou Faux : Dans un contrat d'assurance-vie, les fonds sont bloqués pendant huit ans.",
+        type: 'choix_unique',
+        options: [{ label: "Vrai", value: "vrai", points: 0 },{ label: "Faux", value: "faux", points: 1 }],
+    },
+     {
+        id: 'q40_connaissance_scpi',
+        question: "Vrai ou Faux : Une SCPI est un placement qui offre une garantie en capital.",
         type: 'choix_unique',
         options: [{ label: "Vrai", value: "vrai", points: 0 },{ label: "Faux", value: "faux", points: 1 }],
     },
 
-    // --- Objectifs & Comportement (Questions 42 à 46 du PDF + Site Netlify) ---
+    // --- Objectifs & Comportement ---
+    {
+        id: 'q_horizon_placement',
+        question: "Quel est votre horizon de placement principal ?",
+        type: 'choix_unique',
+        options: [
+            { label: "Court terme (Moins de 2 ans)", value: "a", points: 0 },
+            { label: "Moyen terme (2 à 8 ans)", value: "b", points: 1 },
+            { label: "Long terme (Plus de 8 ans)", value: "c", points: 2 },
+        ],
+    },
     {
         id: 'q_objectif_principal',
         question: "Quel est votre objectif principal ?",
@@ -153,19 +163,8 @@ const questions: Question[] = [
         type: 'choix_unique',
         options: [
             { label: "Je vends tout pour limiter les pertes.", value: "a", points: 0 },
-            { label: "J'attends un peu avant d'agir.", value: "b", points: 1 },
-            { label: "Je ne fais rien et j'attends le rebond.", value: "c", points: 2 },
-            { label: "Je renforce ma position, c'est une opportunité.", value: "d", points: 3 },
-        ],
-    },
-    {
-        id: 'q43_optimisme',
-        question: "En matière financière, vous êtes plutôt :",
-        type: 'choix_unique',
-        options: [
-            { label: "Pessimiste, il faut se protéger au premier signal de baisse.", value: "a", points: 0 },
-            { label: "Neutre, il faut juger au cas par cas.", value: "b", points: 1 },
-            { label: "Optimiste, le marché finit toujours par remonter.", value: "c", points: 2 },
+            { label: "Je ne fais rien et j'attends le rebond.", value: "b", points: 2 },
+            { label: "Je renforce ma position, c'est une opportunité.", value: "c", points: 3 },
         ],
     },
     {
@@ -183,11 +182,9 @@ const questions: Question[] = [
         question: "Parmi ces couples perte/gain potentiels, lequel choisissez-vous ?",
         type: 'choix_unique',
         options: [
-            { label: "Pire : +5% / Meilleur : +10%", value: "a", points: 0 },
-            { label: "Pire : 0% / Meilleur : +20%", value: "b", points: 1 },
-            { label: "Pire : -10% / Meilleur : +50%", value: "c", points: 2 },
-            { label: "Pire : -25% / Meilleur : +90%", value: "d", points: 3 },
-            { label: "Pire : -50% / Meilleur : +200%", value: "e", points: 4 },
+            { label: "Pire : 0% / Meilleur : +10%", value: "a", points: 0 },
+            { label: "Pire : -10% / Meilleur : +30%", value: "b", points: 2 },
+            { label: "Pire : -30% / Meilleur : +70%", value: "c", points: 4 },
         ],
     },
 ];
@@ -222,4 +219,3 @@ export const configRisque: QuestionnaireConfig = {
     stockageId: 'reponses_profil_risque',
     questions: questions,
     results: results,
-};
