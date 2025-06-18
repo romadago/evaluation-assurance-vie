@@ -3,27 +3,15 @@
 import { QuestionnaireConfig, Question } from './types.js';
 
 const questions: Question[] = [
-    // --- SITUATION PERSONNELLE & PATRIMONIALE ---
-    {
-        id: 'q4_retraite',
-        question: "Quand prévoyez-vous de partir à la retraite ?",
-        type: 'choix_unique',
-        options: [
-            { label: "Je suis déjà retraité(e)", value: "a", points: 0 },
-            { label: "Dans moins de 5 ans", value: "b", points: 1 },
-            { label: "Dans plus de 5 ans", value: "c", points: 2 },
-        ],
-    },
+    // --- Situation Patrimoniale ---
     {
         id: 'q5_revenus',
         question: "Quels sont les revenus nets annuels de votre foyer ?",
         type: 'choix_unique',
         options: [
-            { label: "Inférieur à 25 000 €", value: "a", points: 0 },
-            { label: "Entre 25 000 et 50 000 €", value: "b", points: 1 },
-            { label: "Entre 50 000 et 75 000 €", value: "c", points: 2 },
-            { label: "Entre 75 000 et 100 000 €", value: "d", points: 3 },
-            { label: "Au-delà de 100 000 €", value: "e", points: 4 },
+            { label: "Inférieur à 50 000 €", value: "a", points: 1 },
+            { label: "Entre 50 000 et 100 000 €", value: "b", points: 2 },
+            { label: "Au-delà de 100 000 €", value: "c", points: 3 },
         ],
     },
     {
@@ -31,10 +19,9 @@ const questions: Question[] = [
         question: "Combien pouvez-vous épargner chaque mois ?",
         type: 'choix_unique',
         options: [
-            { label: "Je n'épargne pas", value: "a", points: 0 },
-            { label: "De 0 à 500 €", value: "b", points: 1 },
-            { label: "De 500 à 1 000 €", value: "c", points: 2 },
-            { label: "Plus de 1 000 €", value: "d", points: 3 },
+            { label: "Moins de 500 €", value: "a", points: 1 },
+            { label: "De 500 à 1 000 €", value: "b", points: 2 },
+            { label: "Plus de 1 000 €", value: "c", points: 3 },
         ],
     },
     {
@@ -42,10 +29,9 @@ const questions: Question[] = [
         question: "A combien estimez-vous votre patrimoine immobilier (emprunts déduits) ?",
         type: 'choix_unique',
         options: [
-            { label: "0", value: "a", points: 0 },
-            { label: "Inférieur à 100 000 €", value: "b", points: 1 },
-            { label: "Entre 100 000 et 300 000 €", value: "c", points: 2 },
-            { label: "Au-delà de 300 000 €", value: "d", points: 3 },
+            { label: "Inférieur à 100 000 €", value: "a", points: 1 },
+            { label: "Entre 100 000 et 500 000 €", value: "b", points: 2 },
+            { label: "Au-delà de 500 000 €", value: "c", points: 3 },
         ],
     },
     {
@@ -54,47 +40,45 @@ const questions: Question[] = [
         type: 'choix_unique',
         options: [
             { label: "Inférieur à 20 000 €", value: "a", points: 0 },
-            { label: "Entre 20 000 et 50 000 €", value: "b", points: 1 },
-            { label: "Entre 50 000 et 200 000 €", value: "c", points: 2 },
-            { label: "Au-delà de 200 000 €", value: "d", points: 3 },
+            { label: "Entre 20 000 et 100 000 €", value: "b", points: 1 },
+            { label: "Au-delà de 100 000 €", value: "c", points: 2 },
         ],
     },
     {
-        id: 'q11_habitation',
-        question: "Concernant votre habitation principale, quelle est aujourd'hui votre situation ?",
+        id: 'q12_depense_imprevue',
+        question: "Si vous deviez faire face à une dépense importante et imprévue, pourriez-vous le faire grâce à vos seuls revenus ou liquidités ?",
         type: 'choix_unique',
         options: [
-            { label: "Locataire", value: "a", points: 0 },
-            { label: "Propriétaire avec un emprunt de plus de 5 ans", value: "b", points: 1 },
-            { label: "Propriétaire avec un emprunt de moins de 5 ans", value: "c", points: 2 },
-            { label: "Propriétaire sans remboursement", value: "d", points: 3 },
+            { label: "Non", value: "non", points: 0 },
+            { label: "Je ne sais pas", value: "nsp", points: 1 },
+            { label: "Oui", value: "oui", points: 2 },
         ],
     },
     {
         id: 'q13_evolution_revenus',
-        question: "Estimez-vous que vos revenus vont :",
+        question: "Comment estimez-vous l'évolution de vos revenus futurs ?",
         type: 'choix_unique',
         options: [
-            { label: "Augmenter régulièrement dans le temps", value: "a", points: 2 },
-            { label: "Rester à peu près stables", value: "b", points: 1 },
-            { label: "Baisser ou être instables", value: "c", points: 0 },
-            { label: "Je ne sais pas", value: "d", points: 0 },
+            { label: "Ils pourraient baisser ou être instables", value: "a", points: 0 },
+            { label: "Ils devraient rester à peu près stables", value: "b", points: 1 },
+            { label: "Ils vont augmenter régulièrement", value: "c", points: 2 },
         ],
     },
     
-    // --- CONNAISSANCE & EXPÉRIENCE FINANCIÈRE ---
+    // --- Expérience et Connaissances Financières ---
     {
         id: 'q17_experience_actions',
-        question: "Avez-vous déjà investi dans des actions (détenues en direct) ?",
+        question: "Avez-vous déjà investi dans des actions en direct ?",
         type: 'choix_unique',
         options: [
             { label: "Non", value: "non", points: 0 },
-            { label: "Oui", value: "oui", points: 2 },
+            { label: "Oui, une ou deux fois", value: "b", points: 1 },
+            { label: "Oui, régulièrement", value: "c", points: 2 },
         ],
     },
-     {
+    {
         id: 'q19_experience_opcvm',
-        question: "Avez-vous déjà investi dans des OPCVM (FCP, SICAV) ?",
+        question: "Avez-vous déjà investi dans des OPCVM (Fonds, SICAV) ?",
         type: 'choix_unique',
         options: [
             { label: "Non", value: "non", points: 0 },
@@ -111,121 +95,133 @@ const questions: Question[] = [
         ],
     },
     {
+        id: 'q22_reaction_perte_passee',
+        question: "Si vous avez déjà perdu de l'argent sur un investissement, comment avez-vous réagi ?",
+        type: 'choix_unique',
+        options: [
+            { label: "Je n'ai jamais perdu d'argent", value: "a", points: 1 },
+            { label: "J'ai trouvé cela anormal", value: "b", points: 0 },
+            { label: "J'ai trouvé cela normal, le risque fait partie du jeu", value: "c", points: 2 },
+        ],
+    },
+    {
         id: 'q25_connaissance_rendement',
-        question: "Pour espérer avoir un rendement élevé, il faut être disposé à prendre des risques et, au final, accepter de perdre de l'argent.",
+        question: "Vrai ou Faux : Pour espérer un rendement élevé, il faut accepter un risque de perte en capital.",
         type: 'choix_unique',
         options: [
             { label: "Vrai", value: "vrai", points: 2 },
             { label: "Faux", value: "faux", points: 0 },
-            { label: "Je ne sais pas", value: "nsp", points: 0 },
         ],
     },
     {
         id: 'q27_connaissance_diversification',
-        question: "Sur un même marché, un portefeuille qui contient un nombre élevé de produits est généralement moins risqué qu'un portefeuille concentré sur un seul produit.",
+        question: "Vrai ou Faux : Un portefeuille diversifié est généralement moins risqué qu'un portefeuille concentré.",
         type: 'choix_unique',
         options: [
             { label: "Vrai", value: "vrai", points: 2 },
             { label: "Faux", value: "faux", points: 0 },
-            { label: "Je ne sais pas", value: "nsp", points: 0 },
-        ],
-    },
-    {
-        id: 'q28_connaissance_action_pret',
-        question: "Quand je détiens une action d'une société, je lui prête de l'argent.",
-        type: 'choix_unique',
-        options: [
-            { label: "Vrai", value: "vrai", points: 0 },
-            { label: "Faux", value: "faux", points: 1 },
-            { label: "Je ne sais pas", value: "nsp", points: 0 },
-        ],
-    },
-     {
-        id: 'q32_connaissance_opcvm',
-        question: "Les OPCVM investis en actions sont généralement plus risqués que les OPCVM investis en obligations.",
-        type: 'choix_unique',
-        options: [
-            { label: "Vrai", value: "vrai", points: 1 },
-            { label: "Faux", value: "faux", points: 0 },
-            { label: "Je ne sais pas", value: "nsp", points: 0 },
         ],
     },
     {
         id: 'q34_connaissance_volatilite',
-        question: "La volatilité d'un fonds est un bon indicateur de son niveau de risque.",
+        question: "Vrai ou Faux : La volatilité d'un fonds est un bon indicateur de son niveau de risque.",
         type: 'choix_unique',
         options: [
             { label: "Vrai", value: "vrai", points: 2 },
             { label: "Faux", value: "faux", points: 0 },
-            { label: "Je ne sais pas", value: "nsp", points: 0 },
         ],
     },
-    // --- TOLÉRANCE AU RISQUE ---
-    {
-        id: 'q42_reaction_perte',
-        question: "Vous avez investi dans un produit qui vient de perdre 20% en trois mois. Quelle est votre réaction ?",
+     {
+        id: 'q37_connaissance_blocage_av',
+        question: "Vrai ou Faux : Dans un contrat d'assurance-vie, mes fonds sont bloqués pendant huit ans.",
         type: 'choix_unique',
         options: [
-            { label: "Je vends, j'ai déjà trop attendu.", value: "a", points: 0 },
-            { label: "J'attends un peu mais si cela ne s'améliore pas, j'agis.", value: "b", points: 1 },
-            { label: "Pas de problème, j'attends. Tant que je n'ai pas vendu, je n'ai pas perdu !", value: "c", points: 2 },
-            { label: "J'augmente mon investissement. À ce prix là, c'est cadeau !", value: "d", points: 3 },
+            { label: "Vrai", value: "vrai", points: 0 },
+            { label: "Faux", value: "faux", points: 1 },
+        ],
+    },
+     {
+        id: 'q40_connaissance_scpi',
+        question: "Vrai ou Faux : Une SCPI est un produit financier qui garantit le capital.",
+        type: 'choix_unique',
+        options: [
+            { label: "Vrai", value: "vrai", points: 0 },
+            { label: "Faux", value: "faux", points: 1 },
+        ],
+    },
+
+    // --- Comportement & Tolérance au Risque ---
+     {
+        id: 'q_horizon_placement',
+        question: "Quel est votre horizon de placement principal ?",
+        type: 'choix_unique',
+        options: [
+            { label: "Court terme (Moins de 2 ans)", value: "a", points: 0 },
+            { label: "Moyen terme (2 à 8 ans)", value: "b", points: 1 },
+            { label: "Long terme (Plus de 8 ans)", value: "c", points: 2 },
+        ],
+    },
+    {
+        id: 'q_objectif_principal',
+        question: "Quel est votre objectif principal ?",
+        type: 'choix_unique',
+        options: [
+            { label: "Préserver mon capital avant tout", value: "a", points: 0 },
+            { label: "Faire fructifier mon capital", value: "b", points: 2 },
+            { label: "Obtenir un complément de revenu", value: "c", points: 1 },
+        ],
+    },
+    {
+        id: 'q42_reaction_perte_20pc',
+        question: "Votre portefeuille perd 20% en trois mois. Quelle est votre réaction ?",
+        type: 'choix_unique',
+        options: [
+            { label: "Je vends tout pour limiter les pertes.", value: "a", points: 0 },
+            { label: "Je ne fais rien et j'attends.", value: "b", points: 2 },
+            { label: "Je renforce ma position, c'est une opportunité.", value: "c", points: 3 },
         ],
     },
     {
         id: 'q44_attente_rebond',
-        question: "La valeur de votre portefeuille a beaucoup baissé, combien de temps êtes-vous disposé(e) à attendre avant qu'il ne revienne à sa valeur initiale ?",
+        question: "Après une baisse, combien de temps attendez-vous pour retrouver votre mise initiale ?",
         type: 'choix_unique',
         options: [
-            { label: "Moins de 6 mois", value: "a", points: 0 },
-            { label: "De 6 mois à 1 an", value: "b", points: 1 },
-            { label: "De 1 an à 2 ans", value: "c", points: 2 },
-            { label: "Plus de 2 ans", value: "d", points: 3 },
+            { label: "Moins de 1 an", value: "a", points: 0 },
+            { label: "De 1 an à 3 ans", value: "b", points: 1 },
+            { label: "Plus de 3 ans", value: "c", points: 2 },
         ],
     },
     {
         id: 'q46_choix_investissement',
-        question: "On vous propose 5 investissements. Lequel choisissez-vous ?",
+        question: "Parmi ces couples perte/gain potentiels, lequel choisissez-vous ?",
         type: 'choix_unique',
         options: [
-            { label: "Pire résultat : +5% / Meilleur résultat : +10%", value: "a", points: 0 },
-            { label: "Pire résultat : 0% / Meilleur résultat : +20%", value: "b", points: 1 },
-            { label: "Pire résultat : -10% / Meilleur résultat : +50%", value: "c", points: 2 },
-            { label: "Pire résultat : -25% / Meilleur résultat : +90%", value: "d", points: 3 },
-            { label: "Pire résultat : -50% / Meilleur résultat : +200%", value: "e", points: 4 },
-        ],
-    },
-    {
-        id: 'q47_inquietude_perte',
-        question: "À partir de quel niveau de perte êtes-vous vraiment inquiet(e) ?",
-        type: 'choix_unique',
-        options: [
-            { label: "5%", value: "a", points: 0 },
-            { label: "10%", value: "b", points: 1 },
-            { label: "20%", value: "c", points: 2 },
-            { label: "Je suis toujours confiant(e)", value: "d", points: 3 },
+            { label: "Pire : 0% / Meilleur : +10%", value: "a", points: 0 },
+            { label: "Pire : -10% / Meilleur : +30%", value: "b", points: 2 },
+            { label: "Pire : -30% / Meilleur : +70%", value: "c", points: 4 },
         ],
     },
 ];
 
+// Les profils de risque ont été réajustés pour le nouveau scoring
 const results = [
     {
         min: 0,
-        max: 12,
+        max: 13,
         label: "Profil Prudent",
         imageSrc: "/prudent.jpg",
         description: "Votre profil privilégie la sécurité et la préservation du capital. Les solutions à faible risque, même avec un rendement modéré, sont les plus adaptées à vos objectifs."
     },
     {
-        min: 13,
-        max: 24,
+        min: 14,
+        max: 27,
         label: "Profil Équilibré",
         imageSrc: "/equilibre.jpg",
         description: "Vous recherchez un bon compromis entre la sécurité et la performance. Un portefeuille diversifié, alliant des actifs garantis et une part d'actifs plus dynamiques, correspond à votre approche."
     },
     {
-        min: 25,
-        max: 37, // Score maximum possible avec cette sélection de questions
+        min: 28,
+        max: 42, // Score maximum possible
         label: "Profil Dynamique",
         imageSrc: "/dynamique.jpg",
         description: "Vous êtes prêt à accepter une part de risque plus importante pour viser un rendement potentiellement plus élevé. Votre horizon de temps et votre connaissance des marchés vous permettent d'envisager des placements plus offensifs."
@@ -234,8 +230,7 @@ const results = [
 
 export const configRisque: QuestionnaireConfig = {
     id: 'questionnaire-risque',
-    titre: 'Définissez votre Profil de Risque',
+    titre: 'Définissez votre Profil d\'Investisseur',
     stockageId: 'reponses_profil_risque',
     questions: questions,
     results: results,
-};
