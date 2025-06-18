@@ -3,7 +3,7 @@
 import { QuestionnaireConfig, Question } from './types.js';
 
 const questions: Question[] = [
-    // --- Situation Patrimoniale ---
+    // --- Situation Patrimoniale (Questions 5 à 8, 12, 13 du PDF) ---
     {
         id: 'q5_revenus',
         question: "Quels sont les revenus nets annuels de votre foyer ?",
@@ -65,33 +65,35 @@ const questions: Question[] = [
         ],
     },
     
-    // --- Expérience et Connaissances Financières ---
+    // --- Expérience et Connaissances (Questions 17 à 37 du PDF) ---
     {
         id: 'q17_experience_actions',
-        question: "Avez-vous déjà investi dans des actions en direct ?",
+        question: "Votre expérience d'investissement en actions directes ?",
         type: 'choix_unique',
         options: [
-            { label: "Non", value: "non", points: 0 },
-            { label: "Oui, une ou deux fois", value: "b", points: 1 },
-            { label: "Oui, régulièrement", value: "c", points: 2 },
+            { label: "Aucune", value: "a", points: 0 },
+            { label: "Une ou deux fois", value: "b", points: 1 },
+            { label: "Régulière", value: "c", points: 2 },
         ],
     },
     {
         id: 'q19_experience_opcvm',
-        question: "Avez-vous déjà investi dans des OPCVM (Fonds, SICAV) ?",
+        question: "Votre expérience en OPCVM (Fonds, SICAV) ?",
         type: 'choix_unique',
         options: [
-            { label: "Non", value: "non", points: 0 },
-            { label: "Oui", value: "oui", points: 1 },
+            { label: "Aucune", value: "a", points: 0 },
+            { label: "Une ou deux fois", value: "b", points: 1 },
+            { label: "Régulière", value: "c", points: 2 },
         ],
     },
     {
         id: 'q20_experience_scpi',
-        question: "Avez-vous déjà investi dans de l'immobilier financier (SCPI, OPCI) ?",
+        question: "Votre expérience en immobilier financier (SCPI, OPCI) ?",
         type: 'choix_unique',
         options: [
-            { label: "Non", value: "non", points: 0 },
-            { label: "Oui", value: "oui", points: 1 },
+            { label: "Aucune", value: "a", points: 0 },
+            { label: "Une ou deux fois", value: "b", points: 1 },
+            { label: "Régulière", value: "c", points: 2 },
         ],
     },
     {
@@ -99,76 +101,50 @@ const questions: Question[] = [
         question: "Si vous avez déjà perdu de l'argent sur un investissement, comment avez-vous réagi ?",
         type: 'choix_unique',
         options: [
-            { label: "Je n'ai jamais perdu d'argent", value: "a", points: 1 },
-            { label: "J'ai trouvé cela anormal", value: "b", points: 0 },
+            { label: "Jamais perdu d'argent / Cela m'a semblé anormal", value: "a", points: 0 },
             { label: "J'ai trouvé cela normal, le risque fait partie du jeu", value: "c", points: 2 },
         ],
     },
     {
         id: 'q25_connaissance_rendement',
-        question: "Vrai ou Faux : Pour espérer un rendement élevé, il faut accepter un risque de perte en capital.",
+        question: "Pour espérer un rendement élevé, il faut accepter un risque de perte en capital.",
         type: 'choix_unique',
-        options: [
-            { label: "Vrai", value: "vrai", points: 2 },
-            { label: "Faux", value: "faux", points: 0 },
-        ],
+        options: [{ label: "Vrai", value: "vrai", points: 2 },{ label: "Faux", value: "faux", points: 0 },{ label: "Je ne sais pas", value: "nsp", points: 0 }],
+    },
+    {
+        id: 'q26_connaissance_temps',
+        question: "Plus j'ai du temps devant moi, plus je peux prendre des positions risquées.",
+        type: 'choix_unique',
+        options: [{ label: "Vrai", value: "vrai", points: 2 },{ label: "Faux", value: "faux", points: 0 },{ label: "Je ne sais pas", value: "nsp", points: 0 }],
     },
     {
         id: 'q27_connaissance_diversification',
-        question: "Vrai ou Faux : Un portefeuille diversifié est généralement moins risqué qu'un portefeuille concentré.",
+        question: "Un portefeuille diversifié est généralement moins risqué qu'un portefeuille concentré.",
         type: 'choix_unique',
-        options: [
-            { label: "Vrai", value: "vrai", points: 2 },
-            { label: "Faux", value: "faux", points: 0 },
-        ],
+        options: [{ label: "Vrai", value: "vrai", points: 2 },{ label: "Faux", value: "faux", points: 0 },{ label: "Je ne sais pas", value: "nsp", points: 0 }],
     },
-    {
+     {
         id: 'q34_connaissance_volatilite',
-        question: "Vrai ou Faux : La volatilité d'un fonds est un bon indicateur de son niveau de risque.",
+        question: "La volatilité d'un fonds est un bon indicateur de son niveau de risque.",
         type: 'choix_unique',
-        options: [
-            { label: "Vrai", value: "vrai", points: 2 },
-            { label: "Faux", value: "faux", points: 0 },
-        ],
+        options: [{ label: "Vrai", value: "vrai", points: 2 },{ label: "Faux", value: "faux", points: 0 },{ label: "Je ne sais pas", value: "nsp", points: 0 }],
     },
      {
         id: 'q37_connaissance_blocage_av',
-        question: "Vrai ou Faux : Dans un contrat d'assurance-vie, mes fonds sont bloqués pendant huit ans.",
+        question: "Dans un contrat d'assurance-vie, mes fonds sont bloqués pendant huit ans.",
         type: 'choix_unique',
-        options: [
-            { label: "Vrai", value: "vrai", points: 0 },
-            { label: "Faux", value: "faux", points: 1 },
-        ],
-    },
-     {
-        id: 'q40_connaissance_scpi',
-        question: "Vrai ou Faux : Une SCPI est un produit financier qui garantit le capital.",
-        type: 'choix_unique',
-        options: [
-            { label: "Vrai", value: "vrai", points: 0 },
-            { label: "Faux", value: "faux", points: 1 },
-        ],
+        options: [{ label: "Vrai", value: "vrai", points: 0 },{ label: "Faux", value: "faux", points: 1 }],
     },
 
-    // --- Comportement & Tolérance au Risque ---
-     {
-        id: 'q_horizon_placement',
-        question: "Quel est votre horizon de placement principal ?",
-        type: 'choix_unique',
-        options: [
-            { label: "Court terme (Moins de 2 ans)", value: "a", points: 0 },
-            { label: "Moyen terme (2 à 8 ans)", value: "b", points: 1 },
-            { label: "Long terme (Plus de 8 ans)", value: "c", points: 2 },
-        ],
-    },
+    // --- Objectifs & Comportement (Questions 42 à 46 du PDF + Site Netlify) ---
     {
         id: 'q_objectif_principal',
         question: "Quel est votre objectif principal ?",
         type: 'choix_unique',
         options: [
             { label: "Préserver mon capital avant tout", value: "a", points: 0 },
-            { label: "Faire fructifier mon capital", value: "b", points: 2 },
-            { label: "Obtenir un complément de revenu", value: "c", points: 1 },
+            { label: "Obtenir un complément de revenu", value: "b", points: 1 },
+            { label: "Faire fructifier mon capital", value: "c", points: 2 },
         ],
     },
     {
@@ -177,8 +153,19 @@ const questions: Question[] = [
         type: 'choix_unique',
         options: [
             { label: "Je vends tout pour limiter les pertes.", value: "a", points: 0 },
-            { label: "Je ne fais rien et j'attends.", value: "b", points: 2 },
-            { label: "Je renforce ma position, c'est une opportunité.", value: "c", points: 3 },
+            { label: "J'attends un peu avant d'agir.", value: "b", points: 1 },
+            { label: "Je ne fais rien et j'attends le rebond.", value: "c", points: 2 },
+            { label: "Je renforce ma position, c'est une opportunité.", value: "d", points: 3 },
+        ],
+    },
+    {
+        id: 'q43_optimisme',
+        question: "En matière financière, vous êtes plutôt :",
+        type: 'choix_unique',
+        options: [
+            { label: "Pessimiste, il faut se protéger au premier signal de baisse.", value: "a", points: 0 },
+            { label: "Neutre, il faut juger au cas par cas.", value: "b", points: 1 },
+            { label: "Optimiste, le marché finit toujours par remonter.", value: "c", points: 2 },
         ],
     },
     {
@@ -196,14 +183,15 @@ const questions: Question[] = [
         question: "Parmi ces couples perte/gain potentiels, lequel choisissez-vous ?",
         type: 'choix_unique',
         options: [
-            { label: "Pire : 0% / Meilleur : +10%", value: "a", points: 0 },
-            { label: "Pire : -10% / Meilleur : +30%", value: "b", points: 2 },
-            { label: "Pire : -30% / Meilleur : +70%", value: "c", points: 4 },
+            { label: "Pire : +5% / Meilleur : +10%", value: "a", points: 0 },
+            { label: "Pire : 0% / Meilleur : +20%", value: "b", points: 1 },
+            { label: "Pire : -10% / Meilleur : +50%", value: "c", points: 2 },
+            { label: "Pire : -25% / Meilleur : +90%", value: "d", points: 3 },
+            { label: "Pire : -50% / Meilleur : +200%", value: "e", points: 4 },
         ],
     },
 ];
 
-// Les profils de risque ont été réajustés pour le nouveau scoring
 const results = [
     {
         min: 0,
@@ -221,7 +209,7 @@ const results = [
     },
     {
         min: 28,
-        max: 42, // Score maximum possible
+        max: 42,
         label: "Profil Dynamique",
         imageSrc: "/dynamique.jpg",
         description: "Vous êtes prêt à accepter une part de risque plus importante pour viser un rendement potentiellement plus élevé. Votre horizon de temps et votre connaissance des marchés vous permettent d'envisager des placements plus offensifs."
@@ -234,3 +222,4 @@ export const configRisque: QuestionnaireConfig = {
     stockageId: 'reponses_profil_risque',
     questions: questions,
     results: results,
+};
