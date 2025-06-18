@@ -187,26 +187,69 @@ const questions: Question[] = [
             { label: "Pire : -30% / Meilleur : +70%", value: "c", points: 4 },
         ],
     },
+    // --- NOUVELLES QUESTIONS PROFESSIONNELLES ---
+    {
+        id: 'q_besoin_liquidite',
+        question: "De quelle part de votre patrimoine financier pourriez-vous avoir besoin dans les 2 prochaines années ?",
+        type: 'choix_unique',
+        options: [
+            { label: "Plus de 30%", value: "a", points: 0 },
+            { label: "Entre 10% et 30%", value: "b", points: 1 },
+            { label: "Moins de 10%", value: "c", points: 2 },
+        ],
+    },
+    {
+        id: 'q_source_patrimoine',
+        question: "Quelle est la source principale de votre patrimoine financier actuel ?",
+        type: 'choix_unique',
+        options: [
+            { label: "Héritage ou donation", value: "a", points: 1 },
+            { label: "Épargne sur revenus salariés", value: "b", points: 2 },
+            { label: "Revenus d'entrepreneur / profession libérale", value: "c", points: 3 },
+            { label: "Plus-values de précédents investissements", value: "d", points: 3 },
+        ],
+    },
+    {
+        id: 'q_reaction_gain',
+        question: "Votre investissement principal gagne 30% en un an. Que faites-vous ?",
+        type: 'choix_unique',
+        options: [
+            { label: "Je vends tout pour sécuriser mes gains.", value: "a", points: 0 },
+            { label: "Je vends une partie et laisse le reste courir.", value: "b", points: 1 },
+            { label: "Je ne touche à rien, je suis sur le long terme.", value: "c", points: 2 },
+        ],
+    },
+    {
+        id: 'q_reaction_complexite',
+        question: "Face à un produit financier que vous ne comprenez pas entièrement, que faites-vous ?",
+        type: 'choix_unique',
+        options: [
+            { label: "Je n'investis pas.", value: "a", points: 0 },
+            { label: "Je demande des explications à un conseiller avant de décider.", value: "b", points: 1 },
+            { label: "J'investis une petite somme pour 'voir'.", value: "c", points: 2 },
+        ],
+    },
 ];
 
+// Les profils de risque ont été réajustés pour le nouveau scoring
 const results = [
     {
         min: 0,
-        max: 13,
+        max: 17,
         label: "Profil Prudent",
         imageSrc: "/prudent.jpg",
         description: "Votre profil privilégie la sécurité et la préservation du capital. Les solutions à faible risque, même avec un rendement modéré, sont les plus adaptées à vos objectifs."
     },
     {
-        min: 14,
-        max: 27,
+        min: 18,
+        max: 35,
         label: "Profil Équilibré",
         imageSrc: "/equilibre.jpg",
         description: "Vous recherchez un bon compromis entre la sécurité et la performance. Un portefeuille diversifié, alliant des actifs garantis et une part d'actifs plus dynamiques, correspond à votre approche."
     },
     {
-        min: 28,
-        max: 42,
+        min: 36,
+        max: 52, // Nouveau score maximum possible
         label: "Profil Dynamique",
         imageSrc: "/dynamique.jpg",
         description: "Vous êtes prêt à accepter une part de risque plus importante pour viser un rendement potentiellement plus élevé. Votre horizon de temps et votre connaissance des marchés vous permettent d'envisager des placements plus offensifs."
