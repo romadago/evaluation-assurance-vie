@@ -1,8 +1,8 @@
 // Fichier : src/configurations/SCPI.ts
 
-import { QuestionnaireConfig } from './types.js';
+import { QuestionnaireConfig, Question } from './types.js';
 
-const questions = [
+const questions: Question[] = [
   {
     id: 'q1_signification',
     question: "Que signifie SCPI ?",
