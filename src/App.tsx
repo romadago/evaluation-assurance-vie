@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import MoteurQuestionnaire from './MoteurQuestionnaire';
-import { configRisque } from './configurations/risque.ts';
+// On importe la nouvelle configuration pour le questionnaire SCPI
+import { configSCPI } from './configurations/SCPI.js'; 
 import logoAeternia from './logo-aeternia.svg';
 import './index.css';
 
@@ -10,14 +11,15 @@ function App() {
   const [email, setEmail] = useState("");
   const [quizStarted, setQuizStarted] = useState(false);
 
+  // On assigne directement la configuration SCPI
+  const config = configSCPI;
+
   const handleStartQuiz = (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
       setQuizStarted(true);
     }
   };
-
-  const config = configRisque;
 
   return (
     <div className="min-h-screen w-full bg-fond-sombre text-white flex flex-col items-center justify-center p-4 sm:p-6">
@@ -36,7 +38,7 @@ function App() {
               {config.titre}
             </h1>
             <p className="text-gray-300 mb-8 max-w-lg mx-auto">
-              Remplissez ce questionnaire pour nous aider à mieux comprendre votre profil et vos objectifs.
+              Répondez à nos 10 questions pour évaluer votre maîtrise de l'investissement en parts de SCPI.
             </p>
             <form onSubmit={handleStartQuiz} className="max-w-sm mx-auto">
               <label htmlFor="email-start" className="font-semibold text-gray-200 mb-2 block">Entrez votre e-mail pour commencer</label>
@@ -57,6 +59,7 @@ function App() {
             </form>
           </div>
         ) : (
+          // Une fois le quiz démarré, on appelle le Moteur en lui passant la configuration SCPI
           <MoteurQuestionnaire config={config} email={email} />
         )}
       </div>
