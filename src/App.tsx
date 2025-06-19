@@ -1,17 +1,18 @@
-// Fichier : src/App.tsx
+// Fichier : src/App.tsx (Version pour le questionnaire SCPI)
 
 import { useState } from 'react';
 import MoteurQuestionnaire from './MoteurQuestionnaire';
-// On importe la nouvelle configuration pour le questionnaire SCPI
-import { configSCPI } from './configurations/SCPI.js'; 
 import logoAeternia from './logo-aeternia.svg';
 import './index.css';
+
+// --- On importe la nouvelle configuration pour le questionnaire SCPI ---
+import { configSCPI } from './configurations/SCPI.js'; 
 
 function App() {
   const [email, setEmail] = useState("");
   const [quizStarted, setQuizStarted] = useState(false);
 
-  // On assigne directement la configuration SCPI
+  // On assigne directement la nouvelle configuration.
   const config = configSCPI;
 
   const handleStartQuiz = (e: React.FormEvent) => {
@@ -59,7 +60,6 @@ function App() {
             </form>
           </div>
         ) : (
-          // Une fois le quiz démarré, on appelle le Moteur en lui passant la configuration SCPI
           <MoteurQuestionnaire config={config} email={email} />
         )}
       </div>
