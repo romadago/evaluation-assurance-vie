@@ -1,10 +1,13 @@
 // Fichier : src/configurations/types.ts
+
+// Chaque option a des points
 export interface Option {
   label: string;
   value: string;
   points: number; 
 }
 
+// Chaque question a un ID et des options avec des points
 export interface Question {
   id: string; 
   question: string;
@@ -12,6 +15,7 @@ export interface Question {
   options: Option[];
 }
 
+// Chaque résultat a une tranche de score (min/max)
 export interface Result {
     min: number;
     max: number;
@@ -20,6 +24,7 @@ export interface Result {
     imageSrc: string;
 }
 
+// La configuration globale du questionnaire
 export interface QuestionnaireConfig {
   id: string;
   titre: string;
